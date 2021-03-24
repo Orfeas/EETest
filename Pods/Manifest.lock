@@ -1,0 +1,44 @@
+PODS:
+  - Alamofire (5.1.0)
+  - AlamofireImage (4.0.3):
+    - Alamofire (< 6.0.0, >= 5.0.2)
+  - CocoaLumberjack (3.7.0):
+    - CocoaLumberjack/Core (= 3.7.0)
+  - CocoaLumberjack/Core (3.7.0)
+  - SVGKit (2.1.0):
+    - CocoaLumberjack (~> 3.0)
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - Alamofire (= 5.1.0)
+  - AlamofireImage (= 4.0.3)
+  - SVGKit (from `https://github.com/SVGKit/SVGKit.git`, branch `3.x`)
+  - SVProgressHUD
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - AlamofireImage
+    - CocoaLumberjack
+    - SVProgressHUD
+
+EXTERNAL SOURCES:
+  SVGKit:
+    :branch: 3.x
+    :git: https://github.com/SVGKit/SVGKit.git
+
+CHECKOUT OPTIONS:
+  SVGKit:
+    :commit: 58152b9f7c85eab239160b36ffdfd364aa43d666
+    :git: https://github.com/SVGKit/SVGKit.git
+
+SPEC CHECKSUMS:
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireImage: 3d1a2010519e58675318735580eb856e88840ff7
+  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+  SVGKit: 132b010efbf57ec345309fe4a7f627c0a40c5d63
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: f37838bdbd912623c2e38ea28f948088b3e08723
+
+COCOAPODS: 1.10.1

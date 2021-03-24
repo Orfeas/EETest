@@ -22,21 +22,29 @@ class FootballLeagueUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testScrolling() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        
+        app.swipeUp()
+        app.swipeUp()
+        app.swipeDown()
+        app.swipeDown()
 
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
+    
+    func testReloadingAndScrolling() throws {
+        let app = XCUIApplication()
+        app.launch()
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        app.navigationBars["Top Football Team"].buttons["refresh"].tap()
+        app.swipeUp()
+        app.swipeUp()
+        app.swipeDown()
+        app.swipeDown()
+
     }
 }
