@@ -16,12 +16,4 @@ class TopFootballTeamInteractor: TopFootballTeamInteractorInputProtocol {
             self?.presenter?.didFailWithError(error: error)
         }
     }
-    
-//    MatchesAPIServices.getTeamForId(teamId: "\(team.id)") {[weak self] teamWithCrest in
-//        var fullTeamObj = teamWithCrest
-//        fullTeamObj.score = team.score
-//        self?.presenter?.didGetCrestUrlForTeam(team: fullTeamObj)
-//    } failure: {[weak self] error in
-//        self?.presenter?.didFailToGetCrest(error: error)
-//    }
 }
