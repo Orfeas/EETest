@@ -13,7 +13,7 @@ class TopFootballTeamView: UIViewController {
     //MARK: - Variables
     var presenter: TopFootballTeamPresenterProtocol?
     
-    var standings: Standings?
+    var teams: Teams?
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -43,7 +43,7 @@ class TopFootballTeamView: UIViewController {
         SVProgressHUD.setDefaultMaskType(.clear)
         SVProgressHUD.show()
         
-        presenter?.getStandings()
+        presenter?.getMatches()
     }
     
     @objc func reloadStandings() {
@@ -58,7 +58,7 @@ extension TopFootballTeamView {
 
 extension TopFootballTeamView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return standings?.count ?? 0
+        return teams?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -68,7 +68,7 @@ extension TopFootballTeamView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var teamCell = TeamTableViewCell()
         
-        guard let standing = standings?[indexPath.row] else {
+        guard let team = teams?[indexPath.row] else {
             return UITableViewCell()
         }
         
@@ -78,7 +78,7 @@ extension TopFootballTeamView: UITableViewDelegate, UITableViewDataSource {
             teamCell = tableView.dequeueReusableCell(withIdentifier: "teamCell") as! TeamTableViewCell
         }
         
-        teamCell.populateWithStanding(standing: standing)
+        teamCell.populateWithTeam(team: team)
         teamCell.selectionStyle = .none
         
         return teamCell
@@ -88,13 +88,11 @@ extension TopFootballTeamView: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TopFootballTeamView: TopFootballTeamViewProtocol {
-    func didGetStandings(standingContext: StandingContext) {
+    func didGetTeams(teams: Teams) {
         SVProgressHUD.dismiss()
         
-        standings = standingContext.table
-        
-        standings?.sort(by: {$0.won > $1.won})
-        
+        self.teams = teams
+                
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }

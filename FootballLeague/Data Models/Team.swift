@@ -12,11 +12,12 @@ typealias Teams = [Team]
 struct Team: Decodable {
     var id: Int
     var name: String
-    var crestUrl: String
+    var crestUrl: String?
+    var score: Int?
     
     var imageUrl: URL? {
         get {
-            guard let imageUrl = URL(string: crestUrl) else {
+            guard let crestUrl = self.crestUrl, let imageUrl = URL(string: crestUrl) else {
                 return nil
             }
             

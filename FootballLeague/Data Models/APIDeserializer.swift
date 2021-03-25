@@ -9,11 +9,8 @@ import Foundation
 
 class APIDeserializer<T: Decodable> {
     static var decoder: JSONDecoder {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-ddThh:mm:ssZ"
 
         let lazyDecoder = JSONDecoder()
-        lazyDecoder.dateDecodingStrategy = .formatted(dateFormatter)
         lazyDecoder.keyDecodingStrategy = .convertFromSnakeCase
 
         return lazyDecoder

@@ -9,12 +9,19 @@
 class TopFootballTeamInteractor: TopFootballTeamInteractorInputProtocol {
     weak var presenter: TopFootballTeamInteractorOutputProtocol?
     
-    func getStandings() {
-        StandingsAPIServices.getStandingsForCompetionId(competitionId: "2021") {[weak self] standingsContext in
-            self?.presenter?.didGetStandings(standingsContext: standingsContext)
+    func getMatches() {
+        MatchesAPIServices.getMatches {[weak self] matches in
+            self?.presenter?.didGetMatches(matches: matches)
         } failure: {[weak self] error in
             self?.presenter?.didFailWithError(error: error)
         }
-
     }
+    
+//    MatchesAPIServices.getTeamForId(teamId: "\(team.id)") {[weak self] teamWithCrest in
+//        var fullTeamObj = teamWithCrest
+//        fullTeamObj.score = team.score
+//        self?.presenter?.didGetCrestUrlForTeam(team: fullTeamObj)
+//    } failure: {[weak self] error in
+//        self?.presenter?.didFailToGetCrest(error: error)
+//    }
 }

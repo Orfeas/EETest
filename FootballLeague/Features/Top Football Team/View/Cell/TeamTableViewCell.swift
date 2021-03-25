@@ -25,12 +25,12 @@ class TeamTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func populateWithStanding(standing: Standing) {
-        teamLabel.text = standing.team.name
-        detailsLabel.text = "Won \(standing.won) games!"
+    func populateWithTeam(team: Team) {
+        teamLabel.text = team.name
+        detailsLabel.text = "Won \(team.score) games!"
         teamImageView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         
-        guard let imageUrl = standing.team.imageUrl else {
+        guard let imageUrl = team.imageUrl else {
             teamImageView.image = UIImage(named: "logo-football-league")
             
             return

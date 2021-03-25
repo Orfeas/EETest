@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TopFootballTeamViewProtocol: class {
-    func didGetStandings(standingContext: StandingContext)
+    func didGetTeams(teams: Teams)
     func didFailWithError(error: APIError?)
 }
 
@@ -17,17 +17,17 @@ protocol TopFootballTeamPresenterProtocol: class {
     var interactor: TopFootballTeamInteractorInputProtocol? { get set }
     var wireframe: TopFootballTeamWireframeProtocol? { get set }
     
-    func getStandings()
+    func getMatches()
 }
 
 protocol TopFootballTeamInteractorInputProtocol: class {
     var presenter: TopFootballTeamInteractorOutputProtocol? { get set }
     
-    func getStandings()
+    func getMatches()
 }
 
 protocol TopFootballTeamInteractorOutputProtocol: class {
-    func didGetStandings(standingsContext: StandingsContext)
+    func didGetMatches(matches: Matches)
     func didFailWithError(error: APIError?)
 }
 
