@@ -57,13 +57,10 @@ class TopFootballTeamTests: XCTestCase {
         let view = try XCTUnwrap(moduleView)
         
         //Create a dummy Standing object
-        let topTeam = Team(id: 0, name: "Team Name", crestUrl: "")
-        let secondTeam = Team(id: 1, name: "Team Name", crestUrl: "")
+        let topTeam = Team(id: 0, name: "Team Name", crestUrl: "", score: 1)
+        let secondTeam = Team(id: 1, name: "Team Name", crestUrl: "", score: 0)
 
-        let topStanding = Standing(team: topTeam, won: 2)
-        let secondStanding = Standing(team: secondTeam, won: 2)
-
-        view.standings = [topStanding, secondStanding]
+        view.teams = [topTeam, secondTeam]
         
         view.tableView.reloadData()
         
@@ -74,36 +71,57 @@ class TopFootballTeamTests: XCTestCase {
         XCTAssertNotNil(topCell)
         XCTAssertEqual(topCell.selectionStyle, UITableViewCell.SelectionStyle.none)
         XCTAssertEqual(topCell.teamLabel.text, "Team Name")
-        XCTAssertEqual(topCell.detailsLabel.text, "Won \(topStanding.won) games!")
-        XCTAssertNotNil(topCell.teamImageView.image)
+        let topTeamScore = try XCTUnwrap(topTeam.score)
+        XCTAssertEqual(topCell.detailsLabel.text, "Won \(topTeamScore) games!")
         
         let secondaryCell = try XCTUnwrap(view.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? TeamTableViewCell)
 
         XCTAssertNotNil(secondaryCell)
         XCTAssertEqual(secondaryCell.selectionStyle, UITableViewCell.SelectionStyle.none)
         XCTAssertEqual(secondaryCell.teamLabel.text, "Team Name")
-        XCTAssertEqual(secondaryCell.detailsLabel.text, "Won \(secondStanding.won) games!")
-        XCTAssertNotNil(secondaryCell.teamImageView.image)
+        
+        let secondTeamScore = try XCTUnwrap(secondTeam.score)
+
+        XCTAssertEqual(secondaryCell.detailsLabel.text, "Won \(secondTeamScore) games!")
 
     }
     
-    func test_GetStandings_API() {
-        var didGetStandings = false
+    func test_GetMatches_API() {
+        var didGetMatches = false
 
-        let expectation = self.expectation(description: "GetStandings")
+        let expectation = self.expectation(description: "GetMatches")
 
-        StandingsAPIServices.getStandingsForCompetionId(competitionId: "2021") { standingsContext in
-            didGetStandings = true
+        MatchesAPIServices.getMatches { matches in
+            didGetMatches = true
             expectation.fulfill()
         } failure: { error in
-            didGetStandings = false
+            didGetMatches = false
             expectation.fulfill()
         }
 
         
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertTrue(didGetStandings)
+        XCTAssertTrue(didGetMatches)
+
+    }
+    
+    func test_GetTeam_API() {
+        var didGetTeam = false
+
+        let expectation = self.expectation(description: "GetTeam")
+
+        MatchesAPIServices.getTeamForId(teamId: "65") { team in
+            didGetTeam = true
+            expectation.fulfill()
+        } failure: { error in
+            didGetTeam = false
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        XCTAssertTrue(didGetTeam)
 
     }
     
@@ -119,21 +137,22 @@ extension TopFootballTeamTests {
         view.presenter?.interactor?.presenter = mockPresenter
         view.getStandings()
         
-        XCTAssertTrue(mockInteractor.didGetStandings)
-        XCTAssertTrue(mockPresenter.didGetStandings)
+        XCTAssertTrue(mockInteractor.didGetMatches)
+        XCTAssertTrue(mockPresenter.didGetMatches)
     }
 }
 
 // MARK: - Mock classes
 class MockTopFootballTeamView: TopFootballTeamViewProtocol {
+    
     var presenter: TopFootballTeamPresenterProtocol?
     
-    var didGetStandings = false
-    
-    func didGetStandings(standingContext: StandingContext) {
-        didGetStandings = true
+    var didGetTeams = false
+        
+    func didGetTeams(teams: Teams) {
+        didGetTeams = true
     }
-    
+
     func didFailWithError(error: APIError?) {}
 }
 
@@ -143,15 +162,15 @@ class MockTopFootballTeamPresenter: TopFootballTeamPresenterProtocol, TopFootbal
     var interactor: TopFootballTeamInteractorInputProtocol?
     var wireframe: TopFootballTeamWireframeProtocol?
     
-    var didGetStandings = false
+    var didGetMatches = false
     
-    func getStandings() {
-        interactor?.getStandings()
+    func getMatches() {
+        interactor?.getMatches()
     }
     
-    func didGetStandings(standingsContext: StandingsContext) {
-        didGetStandings = true
-        view?.didGetStandings(standingContext: standingsContext.first!)
+    
+    func didGetMatches(matches: Matches) {
+        didGetMatches = true
     }
 
     func didFailWithError(error: APIError?) {}
@@ -160,11 +179,11 @@ class MockTopFootballTeamPresenter: TopFootballTeamPresenterProtocol, TopFootbal
 
 class MockTopFootballTeamInteractor: TopFootballTeamInteractorInputProtocol {
     var presenter: TopFootballTeamInteractorOutputProtocol?
-    var didGetStandings = false
+    var didGetMatches = false
     
-    func getStandings() {
-        didGetStandings = true
-        presenter?.didGetStandings(standingsContext: [StandingContext(type: "TOTAL", table: Standings())])
+    func getMatches() {
+        didGetMatches = true
+        presenter?.didGetMatches(matches: Matches())
     }
 
 }

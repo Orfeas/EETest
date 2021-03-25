@@ -35,6 +35,7 @@ class TeamTableViewCell: UITableViewCell {
         if let imageData = team.imageData {
             teamImageView.image = UIImage(data: imageData)
         } else {
+            teamImageView.image = UIImage(named: "logo-football-league")
             getCrestForTeam(team: team)
         }
         
