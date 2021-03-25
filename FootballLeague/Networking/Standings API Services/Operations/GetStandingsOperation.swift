@@ -9,6 +9,9 @@ import Foundation
 
 final class GetStandingsOperation: BaseOperation {
     init(competitionId: String, success:((Any?) -> Void)?, failure: ((APIError?) -> Void)?) {
-        super.init(path: "/v2/competitions/\(competitionId)/standings", method: .get, parameters: nil, success: success, failure: failure)
+        let toDate = Date().systemDateOnlyFormat()
+        let fromDate = Date().addingTimeInterval(-(60 * 60 * 24 * 30)).systemDateOnlyFormat()
+        
+        super.init(path: "/v2/competitions/\(competitionId)/standings?dateFrom=\(fromDate)&dateTo=\(toDate)", method: .get, parameters: nil, success: success, failure: failure)
     }
 }

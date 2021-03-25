@@ -28,6 +28,7 @@ class TeamTableViewCell: UITableViewCell {
     func populateWithStanding(standing: Standing) {
         teamLabel.text = standing.team.name
         detailsLabel.text = "Won \(standing.won) games!"
+        teamImageView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
         
         guard let imageUrl = standing.team.imageUrl else {
             teamImageView.image = UIImage(named: "logo-football-league")

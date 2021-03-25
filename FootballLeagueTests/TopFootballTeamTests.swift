@@ -87,6 +87,26 @@ class TopFootballTeamTests: XCTestCase {
 
     }
     
+    func test_GetStandings_API() {
+        var didGetStandings = false
+
+        let expectation = self.expectation(description: "GetStandings")
+
+        StandingsAPIServices.getStandingsForCompetionId(competitionId: "2021") { standingsContext in
+            didGetStandings = true
+            expectation.fulfill()
+        } failure: { error in
+            didGetStandings = false
+            expectation.fulfill()
+        }
+
+        
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        XCTAssertTrue(didGetStandings)
+
+    }
+    
 }
 
 // MARK: - Integration tests
@@ -109,7 +129,7 @@ class MockTopFootballTeamView: TopFootballTeamViewProtocol {
     var presenter: TopFootballTeamPresenterProtocol?
     
     var didGetStandings = false
-
+    
     func didGetStandings(standingContext: StandingContext) {
         didGetStandings = true
     }

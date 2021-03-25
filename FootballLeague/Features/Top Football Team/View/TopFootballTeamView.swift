@@ -79,6 +79,7 @@ extension TopFootballTeamView: UITableViewDelegate, UITableViewDataSource {
         }
         
         teamCell.populateWithStanding(standing: standing)
+        teamCell.selectionStyle = .none
         
         return teamCell
     }

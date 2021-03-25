@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1ED1322A260C9EC800EBA5A5 /* Date+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED13229260C9EC800EBA5A5 /* Date+Additions.swift */; };
 		1ED311E32609D3EC00293946 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED311E22609D3EC00293946 /* AppDelegate.swift */; };
 		1ED311E52609D3EC00293946 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED311E42609D3EC00293946 /* SceneDelegate.swift */; };
 		1ED311EA2609D3EC00293946 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ED311E82609D3EC00293946 /* Main.storyboard */; };
@@ -60,6 +61,7 @@
 		0F1D88F5A8FEE232CF1539B7 /* Pods_FootballLeagueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FootballLeagueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1643122058C71F0B0FB24B38 /* Pods-FootballLeagueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootballLeagueTests.release.xcconfig"; path = "Target Support Files/Pods-FootballLeagueTests/Pods-FootballLeagueTests.release.xcconfig"; sourceTree = "<group>"; };
 		199B38CA13432F580C27CB91 /* Pods-FootballLeagueTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FootballLeagueTests.debug.xcconfig"; path = "Target Support Files/Pods-FootballLeagueTests/Pods-FootballLeagueTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1ED13229260C9EC800EBA5A5 /* Date+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Additions.swift"; sourceTree = "<group>"; };
 		1ED311DF2609D3EC00293946 /* FootballLeague.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootballLeague.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ED311E22609D3EC00293946 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ED311E42609D3EC00293946 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				1EFC6E36260A1A3700061B1B /* UIImageView+Additions.swift */,
+				1ED13229260C9EC800EBA5A5 /* Date+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 				1ED312D12609DC0600293946 /* RootNavigationPresenter.swift in Sources */,
 				1EFC6E40260A1D8C00061B1B /* BaseOperation.swift in Sources */,
 				1ED312832609D81400293946 /* TopFootballTeamView.swift in Sources */,
+				1ED1322A260C9EC800EBA5A5 /* Date+Additions.swift in Sources */,
 				1ED312D32609DC0600293946 /* RootNavigationView.swift in Sources */,
 				1ED311E32609D3EC00293946 /* AppDelegate.swift in Sources */,
 				1ED3127D2609D81400293946 /* TopFootballTeamInteractor.swift in Sources */,
