@@ -27,9 +27,8 @@ class TopFootballTeamPresenter: TopFootballTeamPresenterProtocol {
         var topTeams = Teams()
         
         for team in uniqueTeams {
-            var tempTeam = Team(id: team.id, name: team.name)
+            var tempTeam = Team(id: team.id, name: team.name, score: team.score)
             tempTeam.score = team.score
-            
             
             matches.forEach { match in
                 if match.homeTeam.id == team.id {

@@ -77,7 +77,9 @@ extension TopFootballTeamView: UITableViewDelegate, UITableViewDataSource {
         } else {
             teamCell = tableView.dequeueReusableCell(withIdentifier: "teamCell") as! TeamTableViewCell
         }
-        
+        teamCell.imageDownloadClosure = {[weak self] pngData in
+            self?.teams?[indexPath.row].imageData = pngData
+        }
         teamCell.populateWithTeam(team: team)
         teamCell.selectionStyle = .none
         

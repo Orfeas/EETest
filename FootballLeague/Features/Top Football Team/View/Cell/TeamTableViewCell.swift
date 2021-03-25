@@ -9,7 +9,9 @@ import UIKit
 import SVGKit
 
 class TeamTableViewCell: UITableViewCell {
-
+    
+    var imageDownloadClosure: ((Data) -> Void) = {_ in }
+    
     @IBOutlet weak var teamLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
     @IBOutlet weak var teamImageView: UIImageView!
@@ -17,10 +19,6 @@ class TeamTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        teamLabel.text = nil
-        detailsLabel.text = nil
-        teamImageView.image = UIImage(named: "logo-football-league")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,14 +40,16 @@ class TeamTableViewCell: UITableViewCell {
         
     }
     
-    func getCrestForTeam(team: Team) {
+    private func getCrestForTeam(team: Team) {
         MatchesAPIServices.getTeamForId(teamId: "\(team.id)", success: {[weak self] teamWithCrest in
             guard let imageUrl = teamWithCrest.imageUrl else {
                 self?.teamImageView.image = UIImage(named: "logo-football-league")
                 return
             }
-            self?.teamImageView.downloadedsvg(from: imageUrl)
-            team.imageData = self?.teamImageView.image?.pngData()
+            self?.teamImageView.downloadedsvg(from: imageUrl, completion: {[weak self] data in
+                self?.imageDownloadClosure(data)
+            })
+            
         }, failure: nil)
 
 

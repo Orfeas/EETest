@@ -25,7 +25,7 @@ extension UIImageView {
         }
     }
     
-    func downloadedsvg(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+    func downloadedsvg(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit, completion: @escaping ((Data) -> Void)) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard
@@ -35,6 +35,9 @@ extension UIImageView {
                 let receivedicon: SVGKImage = SVGKImage(data: data),
                 let image = receivedicon.uiImage
                 else { return }
+            if let imageData = image.pngData() {
+                completion(imageData)
+            }
             DispatchQueue.main.async() {
                 self.image = image
             }

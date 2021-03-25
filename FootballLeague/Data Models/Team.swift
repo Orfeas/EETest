@@ -9,7 +9,7 @@ import Foundation
 
 typealias Teams = [Team]
 
-class Team: Codable {
+struct Team: Codable {
     var id: Int
     var name: String
     var crestUrl: String?
@@ -24,10 +24,5 @@ class Team: Codable {
             
             return imageUrl
         }
-    }
-    
-    init(id: Int, name: String) {
-        self.id = id
-        self.name = name
     }
 }
