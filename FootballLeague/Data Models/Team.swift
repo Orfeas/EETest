@@ -9,11 +9,12 @@ import Foundation
 
 typealias Teams = [Team]
 
-struct Team: Decodable {
+class Team: Codable {
     var id: Int
     var name: String
     var crestUrl: String?
     var score: Int?
+    var imageData: Data?
     
     var imageUrl: URL? {
         get {
@@ -23,5 +24,10 @@ struct Team: Decodable {
             
             return imageUrl
         }
+    }
+    
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
     }
 }
